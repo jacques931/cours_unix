@@ -38,12 +38,12 @@ Ces commandes fournissent des informations sur l’état du système, telles que
 ## 5. Fichiers de mots de passe et comptes utilisateurs :
 ### Commande : ` cat /etc/apt/sources.list | grep -v -E '^#|^$'`
 Cette commande affiche les dépôts logiciels utilisés par le système APT sans afficher les lignes vides ou les commentaires. Elle permet de connaître les sources des paquets Debian pour la distribution Bookworm.
-```
+`
 root@serveur1:~# cat /etc/apt/sources.list | grep -v -E '^#|^$'
 deb http://deb.debian.org/debian/ bookworm main
 deb http://security.debian.org/debian-security bookworm-security main
 deb http://deb.debian.org/debian/ bookworm-updates main
-```
+`
 
 
 ### Commande : `cat /etc/shadow | grep -vE ':\*:|:!\*:'`
