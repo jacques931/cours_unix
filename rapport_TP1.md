@@ -38,18 +38,23 @@ Ces commandes fournissent des informations sur l’état du système, telles que
 ## 5. Fichiers de mots de passe et comptes utilisateurs :
 ### Commande : ` cat /etc/apt/sources.list | grep -v -E '^#|^$'`
 Cette commande affiche les dépôts logiciels utilisés par le système APT sans afficher les lignes vides ou les commentaires. Elle permet de connaître les sources des paquets Debian pour la distribution Bookworm.
-`
+```
 root@serveur1:~# cat /etc/apt/sources.list | grep -v -E '^#|^$'
 deb http://deb.debian.org/debian/ bookworm main
 deb http://security.debian.org/debian-security bookworm-security main
 deb http://deb.debian.org/debian/ bookworm-updates main
-`
+```
 
 
 ### Commande : `cat /etc/shadow | grep -vE ':\*:|:!\*:'`
 Ce fichier contient les mots de passe chiffrés et les informations d’authentification des utilisateurs du système. Le filtre enlève les comptes sans mot de passe, désactivés ou verrouillés.
-![image](https://github.com/user-attachments/assets/a09ea7ca-3a48-4e5d-8555-a5e7bab5cf25)
-
+```
+root@serveur1:~# cat /etc/shadow | grep -vE ':\*:|:!\*:'
+root:$y$j9T$jp4OUOPDKs9lDTa3XLslG.$ebchWpfHlvZak.lvlcR.7/8eOP4tz0VTS717gxVBlQ9:19998:0:99999:7:::
+messagebus:!:19998::::::
+avahi-autoipd:!:19998::::::
+sshd:!:19998::::::
+```
 
 ### Commande : `cat /etc/passwd | grep -vE 'nologin|sync'`
 Ce fichier contient des informations sur les comptes utilisateurs. Le filtre exclut les comptes système ou désactivés.
@@ -59,10 +64,44 @@ Ces commandes permettent d’obtenir une liste filtrée des comptes actifs sur l
 
 ## 6. Gestion des partitions :
 - `fdisk -l` : Liste les partitions de tous les disques disponibles sur le système.
-![image](https://github.com/user-attachments/assets/54a38795-be38-40d6-9138-889da4ccbfcc)
+```
+Modèle de disque : VBOX HARDDISK
+Unités : secteur de 1 × 512 = 512 octets
+Taille de secteur (logique / physique) : 512 octets / 512 octets
+taille d'E/S (minimale / optimale) : 512 octets / 512 octets
+Type d'étiquette de disque : gpt
+Identifiant de disque : C6F46E0F-5DF7-4FD2-ABD7-E9D545FD058D
+
+Périphérique    Début      Fin Secteurs Taille Type
+/dev/sda1        2048 19531775 19529728   9,3G Système de fichiers Linux
+/dev/sda2    19531776 27344895  7813120   3,7G Système de fichiers Linux
+/dev/sda3    27344896 29298687  1953792   954M Système de fichiers Linux
+/dev/sda4    29298688 41940991 12642304     6G Partition d'échange Linux
+```
 
 - `fdisk -x` : Affiche une version plus détaillée avec le nom et l’UUID de chaque partition.
-![image](https://github.com/user-attachments/assets/5fd5969e-be46-4284-95f2-f028223cf689)
+```
+root@serveur1:~# fdisk -x
+Disque /dev/sda : 20 GiB, 21474836480 octets, 41943040 secteurs
+Modèle de disque : VBOX HARDDISK
+Unités : secteur de 1 × 512 = 512 octets
+Taille de secteur (logique / physique) : 512 octets / 512 octets
+taille d'E/S (minimale / optimale) : 512 octets / 512 octets
+Type d'étiquette de disque : gpt
+Identifiant de disque: C6F46E0F-5DF7-4FD2-ABD7-E9D545FD058D
+Premier LBA utilisable: 34
+Dernier LBA utilisable: 41943006
+LBA alternatif: 41943039
+LBA de départ des entrées de partition: 2
+Entrées de partitions allouées: 128
+LBA de fin des entrées de partition: 33
+
+Périphérique    Début      Fin Secteurs Type-UUID                            UUID                                 Nom          Attr.
+/dev/sda1        2048 19531775 19529728 0FC63DAF-8483-4772-8E79-3D69D8477DE4 F620776F-3B32-4DFE-928F-7C9FA4BF9A8F la racine
+/dev/sda2    19531776 27344895  7813120 0FC63DAF-8483-4772-8E79-3D69D8477DE4 FED8E703-9F17-4F16-9735-F489019DE207 espace tempo
+/dev/sda3    27344896 29298687  1953792 0FC63DAF-8483-4772-8E79-3D69D8477DE4 C356FD0B-FB61-4EC7-9C5C-AC87AA61F441 les logs
+/dev/sda4    29298688 41940991 12642304 0657FD6D-A4AB-43C4-84E5-0933C84B4F4F 2E615512-607D-49BF-AA18-2D5D7C997AEE ma swap
+```
 
 
 Ces commandes sont utiles pour visualiser les partitions présentes sur les disques du système, avec un niveau de détail variable selon l'option utilisée.
