@@ -22,8 +22,9 @@ Les commandes utilisées pour installer et configurer le serveur SSH :
 Ces commandes permettent l’installation du serveur SSH, la configuration du fichier pour autoriser l’accès root, puis le redémarrage et la vérification du statut du service SSH. La connexion est ensuite testée en local sur l’adresse 127.0.0.1.
 
 Pour établir une connexion SSH avec une machine hôte, il est nécessaire de configurer la machine virtuelle :
-- Modifier les paramètres réseau en passant du mode NAT au mode « Accès par pont ».
-- Activer la redirection de port.
+- Activer la redirection du port 22 (port invité) vers le port 2222 (port hôte).
+- Redémarrer la machine virtuelle.
+- Utiliser la commande suivante pour se connecter : `ssh root@127.0.0.1 -p 2222`
 
 ## 4. Commandes d’information système :
 - `dpkg -l | wc -l` : 352 paquets sont installés sur le système.
@@ -37,7 +38,12 @@ Ces commandes fournissent des informations sur l’état du système, telles que
 ## 5. Fichiers de mots de passe et comptes utilisateurs :
 ### Commande : ` cat /etc/apt/sources.list | grep -v -E '^#|^$'`
 Cette commande affiche les dépôts logiciels utilisés par le système APT sans afficher les lignes vides ou les commentaires. Elle permet de connaître les sources des paquets Debian pour la distribution Bookworm.
-![image](https://github.com/user-attachments/assets/573957f5-9fd6-415e-ae94-186f1a3d0845)
+```
+root@serveur1:~# cat /etc/apt/sources.list | grep -v -E '^#|^$'
+deb http://deb.debian.org/debian/ bookworm main
+deb http://security.debian.org/debian-security bookworm-security main
+deb http://deb.debian.org/debian/ bookworm-updates main
+```
 
 
 ### Commande : `cat /etc/shadow | grep -vE ':\*:|:!\*:'`
