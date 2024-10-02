@@ -58,6 +58,10 @@ sshd:!:19998::::::
 
 ### Commande : `cat /etc/passwd | grep -vE 'nologin|sync'`
 Ce fichier contient des informations sur les comptes utilisateurs. Le filtre exclut les comptes système ou désactivés.
+```
+root@serveur1:~# cat /etc/passwd | grep -vE 'nologin|sync'
+root:x:0:0:root:/root:/bin/bash
+```
 
 
 Ces commandes permettent d’obtenir une liste filtrée des comptes actifs sur le système, excluant ceux sans mot de passe ou non interactifs.
