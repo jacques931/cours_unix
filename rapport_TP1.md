@@ -128,6 +128,7 @@ Le redimensionnement d'une partition racine nécessite généralement un live CD
 
 #### Étapes pour redimensionner la partition racine :
 1. Sauvegarder les données importantes.
-2. Démarrer à partir d’un live CD/USB.
-3. Utiliser un outil comme GParted pour redimensionner la partition racine.
-4. Appliquer les changements et redémarrer le système sans le live CD.
+2. Désactiver l'échange (si applicable) : `swapoff -a`
+3. Démarrez fdisk pour modifier la table des partitions du disque : `fdisk /dev/sda`
+4. Redimensionner le système de fichiers : `resize2fs /dev/sda1`
+5. Réactiver le swap : `swapon /dev/sdX`
