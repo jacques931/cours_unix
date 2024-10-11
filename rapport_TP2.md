@@ -115,7 +115,7 @@ J’ai également installé htop, une alternative plus conviviale à top avec la
 
 Pour crée le fichier date.sh et data-toto.sh, avec le terminal on crée d’abord un nouveau dossier ‘scripts’ pour mieux organiser,`mkdir -p ~/scripts` , `cd ~/scripts`, `nano date.sh` et on entre le code.
 
-Il faut avoir les permission pour exécuter, donc on donne les permission avec les commande suivante : `chmod 700 ./date.sh` et `chmod 700 ./date-toto.sh`, afin de vérifier le changement `s -l ./date.sh`. On exécute les fichier avec `./date.sh`, on le met en arrière plan avec CTRL+Z, on refait pareil avec `./date-toto.sh`
+Il faut avoir les permission pour exécuter, donc on donne la permission au propriétaire avec les commande suivante : `chmod 700 ./date.sh` et `chmod 700 ./date-toto.sh`, afin de vérifier le changement `ls -l ./date.sh`. On exécute les fichier avec `./date.sh`, on le met en arrière plan avec CTRL+Z, on refait pareil avec `date-toto.sh`
 
 La commande `jobs` affiche la liste des tâches en arrière-plan avec leurs numéros. La commande `fg` permet de ramener en avant-plan la dernière tâche en arrière-plan, et ensuite, un appui sur `CTRL+C`permet de l'arrêter. La commande `ps` affiche les processus en cours d'exécution et fournit leur PID, ce qui permet de les terminer avec la commande `kill <PID>`. Cependant, comme je n'arrivais pas à arrêter le processus avec `kill 2199`, j'ai utilisé `kill -9 2199` pour forcer sa fermeture.
 
