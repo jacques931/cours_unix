@@ -131,7 +131,7 @@ Le script date.sh affiche chaque seconde le mot "date" suivi de l'heure actuelle
 ## 5/ Journal système rsyslog
 Le service rsyslog n’étant pas initialement installé, je l’ai installé avec `apt install rsyslog`, puis démarré et vérifié son statut avec systemctl avec `systemctl start rsyslog` et `systemctl status rsyslog`. Actuellement, je suis vers la fin de l’exercice donc le PID du demon est 6664
 
-Les messages des services standards sont généralement enregistrés dans /var/log/messages ou /var/log/syslog.
+Les messages des services standards sont généralement enregistrés dans /var/log/messages ou /var/log/syslog. Cependant, sur ma machine, le fichier /var/log/messages est vide, donc les logs sont stockés dans /var/log/syslog 
 #### Fonctionnement de cron et tail :
 - cron : Démon Unix permettant de planifier l’exécution de tâches répétitives.
 - tail -f : Affiche les dernières lignes d’un fichier et suit les nouvelles entrées en temps réel, utile pour surveiller les logs.
