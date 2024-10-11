@@ -117,7 +117,16 @@ Pour crée le fichier date.sh et data-toto.sh, avec le terminal on crée d’abo
 
 Il faut avoir les permission pour exécuter, donc on donne la permission au propriétaire avec les commande suivante : `chmod 700 ./date.sh` et `chmod 700 ./date-toto.sh`, afin de vérifier le changement `ls -l ./date.sh`. On exécute les fichier avec `./date.sh`, on le met en arrière plan avec CTRL+Z, on refait pareil avec `date-toto.sh`
 
-La commande `jobs` affiche la liste des tâches en arrière-plan avec leurs numéros. La commande `fg` permet de ramener en avant-plan la dernière tâche en arrière-plan, et ensuite, un appui sur `CTRL+C`permet de l'arrêter. La commande `ps` affiche les processus en cours d'exécution et fournit leur PID, ce qui permet de les terminer avec la commande `kill <PID>`. Cependant, comme je n'arrivais pas à arrêter le processus avec `kill 2199`, j'ai utilisé `kill -9 2199` pour forcer sa fermeture.
+La commande `jobs` affiche la liste des tâches en arrière-plan avec leurs numéros. 
+```
+[1]-  Stoppé                 ./date.sh
+[2]+  Stoppé                 ./date-toto.sh
+```
+La commande `fg` permet de ramener en avant-plan la dernière tâche en arrière-plan, et ensuite, un appui sur `CTRL+C`permet de l'arrêter. La commande `ps` affiche les processus en cours d'exécution et fournit leur PID, ce qui permet de les terminer avec la commande `kill <PID>`. Cependant, comme je n'arrivais pas à arrêter le processus avec `kill 2199`, j'ai utilisé `kill -9 2199` pour forcer sa fermeture.
+```
+[1]-  Processus arrêté      ./date.sh
+[2]+  Stoppé                 ./date-toto.sh
+```
 
 Le script date.sh affiche chaque seconde le mot "date" suivi de l'heure actuelle au format HH:MM, sans retour à la ligne après "date". Le script date-toto.sh affiche, quant à lui, chaque seconde le mot "toto" suivi de l'heure actuelle, ajustée pour être 5 heures en arrière, au format HH:MM, sans retour à la ligne après "toto".
 
