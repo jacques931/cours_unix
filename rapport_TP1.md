@@ -123,11 +123,9 @@ Le mode rescue permet de réparer un système cassé ou de réinitialiser un mot
 3. Changer le mot de passe : Utiliser `chroot /mnt`, puis la commande `passwd` pour changer le mot de passe root.
 4. Redémarrer le système : Quitter le chroot avec `exit` et redémarrer.
 
-### Redimensionnement de la partition racine sans réinstallation :
-Le redimensionnement d'une partition racine nécessite généralement un live CD.
-
-#### Étapes pour redimensionner la partition racine :
+#### Étapes pour redimensionner la partition racine sans réinstallation :
 1. Sauvegarder les données importantes.
-2. Démarrer à partir d’un live CD/USB.
-3. Utiliser un outil comme GParted pour redimensionner la partition racine.
-4. Appliquer les changements et redémarrer le système sans le live CD.
+2. Désactiver l'échange (si applicable) : `swapoff -a`
+3. Démarrez fdisk pour modifier la table des partitions du disque : `fdisk /dev/sda`
+4. Redimensionner le système de fichiers : `resize2fs /dev/sda1`
+5. Réactiver le swap : `swapon /dev/sdX`
