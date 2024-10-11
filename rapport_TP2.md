@@ -129,7 +129,7 @@ Le script date.sh affiche chaque seconde le mot "date" suivi de l'heure actuelle
 - `ls -l | tee liste | wc -l` : Affiche le nombre de lignes de la sortie de ls -l 
 
 ## 5/ Journal système rsyslog
-Le service rsyslog n’étant pas initialement installé, je l’ai installé avec `apt install rsyslog`, puis démarré et vérifié son statut avec systemctl avec `systemctl start rsyslog` et `systemctl status rsylog`. Actuellement, je suis vers la fin de l’exercice donc le PID du demon est 6664
+Le service rsyslog n’étant pas initialement installé, je l’ai installé avec `apt install rsyslog`, puis démarré et vérifié son statut avec systemctl avec `systemctl start rsyslog` et `systemctl status rsyslog`. Actuellement, je suis vers la fin de l’exercice donc le PID du demon est 6664
 
 Les messages des services standards sont généralement enregistrés dans /var/log/messages ou /var/log/syslog.
 #### Fonctionnement de cron et tail :
