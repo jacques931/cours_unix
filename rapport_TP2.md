@@ -131,7 +131,7 @@ La commande `fg` permet de ramener en avant-plan la dernière tâche en arrière
 Le script date.sh affiche chaque seconde le mot "date" suivi de l'heure actuelle au format HH:MM, sans retour à la ligne après "date". Le script date-toto.sh affiche, quant à lui, chaque seconde le mot "toto" suivi de l'heure actuelle, ajustée pour être 5 heures en arrière, au format HH:MM, sans retour à la ligne après "toto".
 
 ## 4/ Les tubes
-- `cat` sert à afficher le contenu des fichiers alors que tee sert à afficher la sortie d'une commande et à la sauvegarder dans un fichier en même temps. 
+- `cat` sert à afficher le contenu des fichiers alors que `tee` sert à afficher la sortie d'une commande et à la sauvegarder dans un fichier en même temps. 
 - `ls | cat` : Affiche le résultat de la commande ls en utilisant cat 
 - `ls -l | cat > liste` : Le fichier liste contiendra le détail des fichiers et dossiers 
 - `ls -l | tee liste` : La liste détaillée des fichiers est affichée dans le terminal et enregistrée dans le fichier liste 
