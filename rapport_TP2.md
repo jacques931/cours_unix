@@ -1,4 +1,4 @@
-# Compte rendu de services et processus signaux
+ # Compte rendu de services et processus signaux
 ## 1/ Secure Shell : SSH
 1.1 /
 Dans le fichier de configuration SSH (**/etc/ssh/sshd_config**), j’ai modifié la directive PermitRootLogin en yes et retiré le commentaire # pour autoriser les connexions en tant que root. Voici les différentes options possibles :
@@ -140,4 +140,4 @@ La configuration de la rotation des logs se fait via le fichier /etc/logrotate.c
 
 J’ai utilisé dmesg pour vérifier les informations matérielles détectées par le système, telles que le modèle du processeur et les cartes réseau avec les commande suivantes : 
 - `dmesg | grep -i "cpu"`  a révélé un processeur **12th Gen Intel(R) Core(TM) i7-1260P**
-- `dmesg | grep -i "network"` a identifié des cartes réseau **Intel(R) PRO/1000 Network Connection**
+- `dmesg | grep -i "network"` a identifié des cartes réseau **Intel(R) PRO/1000 Network Connection** et **Intel(R) PRO/1000 Network Driver**
