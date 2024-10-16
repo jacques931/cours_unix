@@ -1,7 +1,7 @@
-# Compte rendu de services et processus signaux
+# Compte rendu commande shell bash
 Comme, je suis sur Window, j’utilise le terminal de git bash pour executer les scripts quand il n’est pas necessaire de tester avec la machine virtuel pour aller plus vite 
 
-Exercice : paramètres
+### Exercice : paramètres
 
 Code analyse.sh :
 ```
@@ -10,7 +10,7 @@ echo "Le nom du script est $(basename $0)"
 echo "Le 3ème paramètre est $3"
 echo "Voici la liste des paramètres : $@"
 ```
-
+Résultat :
 ```
 $ ./analyse.sh param1 param2 param3 param4
 Bonjour, vous avez rentré 4 paramètres
@@ -18,7 +18,8 @@ Le nom du script est analyse.sh
 Le 3ème paramètre est param3
 Voici la liste des paramètres : param1 param2 param3 param4
 ```
-Exercice : vérification du nombre de param`etres
+
+### Exercice : vérification du nombre de param`etres
 Code concat.sh : 
 ```
 nb=2
@@ -30,7 +31,7 @@ else
 fi
 
 ```
-
+Résultat
 ```
 $ ./concat.sh param1 param2
 Resultat : param1param2
@@ -39,7 +40,7 @@ Vous devez avoir que 2 paramètres pas plus pas moins
 
 ```
 
-Exercice : argument type et droits
+### Exercice : argument type et droits
 Code test_fichier,sh :
 ```
 if [ -z $1 ] || [ ! -e $1 ]; then
@@ -78,3 +79,5 @@ else
 fi
 
 ```
+
+### Exercice : Afficher le contenu d’un répertoire
