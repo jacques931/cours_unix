@@ -19,7 +19,7 @@ Le 3ème paramètre est param3
 Voici la liste des paramètres : param1 param2 param3 param4
 ```
 
-### Exercice : vérification du nombre de param`etres
+### Exercice : vérification du nombre de paramètres
 Code concat.sh : 
 ```
 nb=2
@@ -29,15 +29,15 @@ if [ $# -eq $nb ];then
 else
     echo "Vous devez avoir que 2 paramètres pas plus pas moins"
 fi
-
 ```
+
 Résultat
+
 ```
 $ ./concat.sh param1 param2
 Resultat : param1param2
 $ ./concat.sh param1
 Vous devez avoir que 2 paramètres pas plus pas moins
-
 ```
 
 ### Exercice : argument type et droits
@@ -77,7 +77,6 @@ if [ -z "$perm" ]; then
 else
     echo $1 "est accessible par $(whoami) en $perm"
 fi
-
 ```
 
 ### Exercice : Afficher le contenu d’un répertoire
@@ -167,9 +166,7 @@ fi
 result=""
 
 # Vérification par login (si $1 est un nom d'utilisateur)
-if [ -n "$1" ]; then
-    result=$(awk -F: -v login="$1" '$1 == login {print $3}' /etc/passwd)
-fi
+result=$(awk -F: -v login="$1" '$1 == login {print $3}' /etc/passwd)
 
 # Si aucun résultat trouvé par login, vérifier par UID
 if [ -z "$result" ]; then
@@ -250,4 +247,72 @@ else
   echo "Erreur lors de la création de l'utilisateur $login."
   exit 1
 fi
+```
+
+### Exercice : lecture au clavier
+- Pour quitter more, on appuie simplement sur la touche `q`.
+- Pour avancer d'une ligne, appuie sur la touche `Enter`.
+- Pour avancer d'une page, appuie sur la barre d’espace `Space`.
+- La commande more ne permet pas de remonter d'une page. Pour cela, on utilise less qui permet la navigation bidirectionnelle. Avec less, tu peux remonter avec la touche `b`.
+- Pour rechercher une chaîne de caractères dans more, utilise / suivi de la chaîne à rechercher. Pour passer à l'occurrence suivante, appuie sur la touche `n`.
+
+Code read.sh :
+```
+# Vérifier si un répertoire est passé en argument
+if [ $# -ne 1 ]; then
+    echo "Il ne faut q'un seul parametre"
+    exit 1
+fi
+
+# Vérifier si le répertoire existe
+if [ ! -d "$1" ]; then
+    echo "Le paramètre n'est pas un répertoire"
+    exit 1
+fi
+
+# Parcourir chaque fichier dans le répertoire
+for FILE in "$1"/*; do
+    # Vérifier si le fichier est un fichier texte
+    if file "$FILE" | grep -q "text"; then
+        # Poser la question à l'utilisateur
+        echo "Voulez-vous visualiser le fichier $(basename "$FILE") ? (o/n)"
+        read -r RESPONSE
+        
+        if [ "$RESPONSE" = "o" ]; then
+            # Lancer la commande more pour afficher le fichier
+            more "$FILE"
+        fi
+    fi
+done
+```
+
+### Exercice : appréciation
+Code appreciation.sh:
+
+```
+# Boucle infinie pour continuer à demander une note jusqu'à ce que l'utilisateur saisisse 'q'
+while true; do
+    read -p "Saisissez une note entre 0 et 20 (ou 'q' pour quitter) : " note
+
+    # Si l'utilisateur entre 'q', on quitte la boucle
+    if [ $note == "q" ]; then
+        break
+    # Vérification que l'entrée est un nombre entre 0 et 20
+    elif [[ $note =~ ^[0-9]+$ ]] && [ $note -le 20 ]; then
+        if [ $note -ge 16 ]; then
+            echo "très bien"
+        elif [ $note -ge 14 ]; then
+            echo "bien"
+        elif [ $note -ge 12 ]; then
+            echo "assez bien"
+        elif [ $note -ge 10 ]; then
+            echo "moyen"
+        else
+            echo "insuffisant"
+        fi
+    # Si l'entrée n'est pas un nombre valide entre 0 et 20, ou autre que 'q'
+    else
+        echo "Entrée invalide, veuillez entrer une note ou 'q' pour quitter."
+    fi
+done
 ```
