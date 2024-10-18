@@ -1,5 +1,5 @@
 # Compte rendu commande shell bash
-Comme, je suis sur Window, j’utilise le terminal de git bash pour executer les scripts quand il n’est pas necessaire de tester avec la machine virtuel pour aller plus vite 
+Étant donné que je suis sous Windows, j'utilise le terminal Git Bash pour exécuter des scripts lorsqu'il n'est pas nécessaire de les tester avec la machine virtuelle, afin de gagner du temps. 
 
 ### Exercice : paramètres
 
