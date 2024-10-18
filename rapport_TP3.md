@@ -42,70 +42,74 @@ Vous devez avoir que 2 paramètres pas plus pas moins
 ### Exercice : argument type et droits
 Code test_fichier.sh :
 ```
-if [ -z "$1" ] || [ ! -e "$1" ]; then
-    echo "Veuillez fournir un fichier valide en paramètre."
+#Verifie qu'il a un parametre
+if [ "$#" -ne 1 ]; then
+    echo "Veuillez fournir un paramètre."
     exit 1
 fi
 
-isFile="false"
+# Verifie si c'est un repertoire
 if [ -d "$1" ]; then
     echo "Le fichier "$1" est un répertoire"
+    exit 1
 else 
     if [ -f "$1" ] && [ -s "$1" ]; then
         echo "Le fichier "$1" est un fichier ordinaire qui n’est pas vide"
-        isFile="true"
     else
         echo "Le fichier "$1" n'est pas un répertoire ou un fichier ordinaire vide"
+        exit 1
     fi
 fi
 
 # Permission
 perm=""
+# Verifie que l'utilisateur a la permission de lire
 if [ -r "$1" ]; then
     perm+="lecture "
 fi
-
+# Verifie que l'utilisateur a la permission d'écrire
 if [ -w "$1" ]; then
     perm+="écriture "
 fi
-
+# Verifie que l'utilisateur a la permission d'exécuter
 if [ -x "$1" ]; then
     perm+="exécution"
 fi
 
-if [ "$isFile" = "true" ]; then
-    if [ -n "$perm" ]; then
+# Verifie qu'il a des permissions
+if [ -n "$perm" ]; then
     echo "$1" "est accessible par $(whoami) en "$perm""
-    else
-        echo "$1" "n'est pas accessible par $(whoami)."
-    fi
+else
+    echo "$1" "n'est pas accessible par $(whoami)."
 fi
+
+exit 0
 ```
 
 ### Exercice : Afficher le contenu d’un répertoire
 Code listdir.sh :
 ```
 # Vérifie que le nombre de paramètres est exactement égal à 1
-if [ $# -ne 1 ]; then
+if [ "$#" -ne 1 ]; then
     echo "Il ne faut q'un seul parametre"
     exit 1
 fi
 
 if [ -d "$1" ]; then
     # Affichage des fichiers
-    echo "####### Fichiers dans $1"
+    echo "####### Fichiers dans "$1""
     ls -p "$1" | grep -v /
 
     # Affichage des répertoires
-    echo "####### Répertoires dans $1"
+    echo "####### Répertoires dans "$1""
     ls -p "$1" | grep /
 else
-    echo "Le paramètre n'est pas un répertoire"
+    echo "Le paramètre n'est pas un répertoire ou un fichier"
 fi
 ```
 ### Exercice : Lister les utilisateurs
 
-Le problème avec la commande for user in $(cat /etc/passwd); do echo $user; done est que cela parcourt chaque ligne du fichier /etc/passwd en la scindant par des espaces, ce qui peut causer des problèmes pour les lignes contenant des espaces dans leurs champs, et donc ne pas traiter correctement chaque ligne comme une unité.
+Le problème avec la commande `for user in $(cat /etc/passwd); do echo $user; done` est que cela parcourt chaque ligne du fichier /etc/passwd en la scindant par des espaces, ce qui peut causer des problèmes pour les lignes contenant des espaces dans leurs champs, et donc ne pas traiter correctement chaque ligne comme une unité.
 
 Voici mon fichier /etc/passwd : 
 ```
@@ -140,7 +144,7 @@ Code listuser.sh :
 for user in $(cut -d':' -f 1 /etc/passwd); do
     uid=$(grep "^$user:" /etc/passwd | cut -d':' -f 3)
     if [ "$uid" -gt 100 ]; then
-        echo $user
+        echo "$user"
     fi
 done
 
@@ -161,7 +165,7 @@ sshd
 Code existuser.sh:
 ```
 # Vérification du nombre d'arguments
-if [ $# -ne 1 ]; then
+if [ "$#" -ne 1 ]; then
     echo "Vous devez avoir 1 paramètre : login ou uid"
     exit 1
 fi
@@ -178,7 +182,7 @@ fi
 
 # Si un résultat est trouvé, l'afficher et retourner succès
 if [ -n "$result" ]; then
-    echo "L'utilisateur a un UID de $result"
+    echo "L'utilisateur a un UID de "$result""
     exit 0
 else
     # Si aucun résultat trouvé, retourner un code d'erreur
@@ -262,7 +266,7 @@ fi
 Code read.sh :
 ```
 # Vérifier si un répertoire est passé en argument
-if [ $# -ne 1 ]; then
+if [ "$#" -ne 1 ]; then
     echo "Il ne faut q'un seul parametre"
     exit 1
 fi
