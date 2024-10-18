@@ -5,10 +5,10 @@
 
 Code analyse.sh :
 ```
-echo "Bonjour, vous avez rentré $# paramètres"
-echo "Le nom du script est $(basename $0)"
-echo "Le 3ème paramètre est $3"
-echo "Voici la liste des paramètres : $@"
+echo "Bonjour, vous avez rentré "$#" paramètres"
+echo "Le nom du script est $(basename "$0")"
+echo "Le 3ème paramètre est "$3""
+echo "Voici la liste des paramètres : "$@""
 ```
 Résultat :
 ```
@@ -22,12 +22,11 @@ Voici la liste des paramètres : param1 param2 param3 param4
 ### Exercice : vérification du nombre de paramètres
 Code concat.sh : 
 ```
-nb=2
-if [ $# -eq $nb ];then
-    concat=$1$2
-    echo "Resultat : $concat"
+if [ "$#" -eq 2 ];then
+    concat=$1$2
+    echo "Resultat : "$concat""
 else
-    echo "Vous devez avoir que 2 paramètres pas plus pas moins"
+    echo "Vous devez avoir que 2 paramètres pas plus pas moins"
 fi
 ```
 
@@ -43,39 +42,43 @@ Vous devez avoir que 2 paramètres pas plus pas moins
 ### Exercice : argument type et droits
 Code test_fichier.sh :
 ```
-if [ -z $1 ] || [ ! -e $1 ]; then
-    echo "Veuillez fournir un fichier valide en paramètre."
-    exit 1
+if [ -z "$1" ] || [ ! -e "$1" ]; then
+    echo "Veuillez fournir un fichier valide en paramètre."
+    exit 1
 fi
 
-if [ -d $1 ]; then
-    echo "Le fichier $1 est un répertoire"
+isFile="false"
+if [ -d "$1" ]; then
+    echo "Le fichier "$1" est un répertoire"
 else 
-    if [ -f $1 ] && [ -s $1 ]; then
-    echo "Le fichier $1 est un fichier ordinaire qui n’est pas vide"
-    else
-        echo "Le fichier $1 n'est pas un répertoire ou un fichier ordinaire vide"
-    fi
+    if [ -f "$1" ] && [ -s "$1" ]; then
+        echo "Le fichier "$1" est un fichier ordinaire qui n’est pas vide"
+        isFile="true"
+    else
+        echo "Le fichier "$1" n'est pas un répertoire ou un fichier ordinaire vide"
+    fi
 fi
 
 # Permission
 perm=""
 if [ -r "$1" ]; then
-    perm+="lecture "
+    perm+="lecture "
 fi
 
 if [ -w "$1" ]; then
-    perm+="écriture "
+    perm+="écriture "
 fi
 
 if [ -x "$1" ]; then
-    perm+="exécution"
+    perm+="exécution"
 fi
 
-if [ -z "$perm" ]; then
-    echo $1 "n'est pas accessible par $(whoami)."
-else
-    echo $1 "est accessible par $(whoami) en $perm"
+if [ "$isFile" = "true" ]; then
+    if [ -n "$perm" ]; then
+    echo "$1" "est accessible par $(whoami) en "$perm""
+    else
+        echo "$1" "n'est pas accessible par $(whoami)."
+    fi
 fi
 ```
 
